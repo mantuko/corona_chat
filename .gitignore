@@ -1,0 +1,5 @@
+# Do not commit real config data
+config.php
+
+# Don't add js packages
+node_modules

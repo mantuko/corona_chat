@@ -1,0 +1,168 @@
+html {
+     height: 100%;
+     margin: 0;
+}
+
+body {
+     background: #fff;
+     font-family: arial;
+     color:  #333;
+     height: 100%;
+     margin: 0;
+}
+
+/* login page - start */
+.login_wrapper__body {
+     height: 100%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.login_form__login_wrapper {
+     max-width: 400px;
+     padding: 1em;
+     background-color: #eee;
+}
+
+.login_form__login_wrapper input[type=text] {
+     max-width: 300px;
+     margin: 0 0 1em 1em;
+}
+/* login page - end */
+
+.grid-container {
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 80% 10%;
+    grid-template-areas: "header" "content" "footer";
+}
+
+header {
+     grid-area: header;
+     grid-row: 1;
+
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     justify-content: center;
+}
+
+h1 {
+
+}
+
+main {
+     grid-area: content;
+     grid-row: 2;
+
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     justify-content: space-evenly;
+}
+
+.video {
+     width: 60%;
+}
+
+.video_container {
+     width: 100%;
+     padding-top: 56.25%;
+     position: relative;
+}
+
+.video_container iframe {
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+}
+
+.video iframe {
+     width: 100%;
+     height: 100%;
+}
+
+input, #chatwindow {
+     font-family: courier new;
+     font-size:  12px;
+}
+
+input[type=button] {
+    cursor:  pointer;
+    border:  1px solid gray;
+}
+
+#chat {
+     width: 30%;
+     text-align: left;
+}
+
+#chatwindow {
+     border: 1px solid #000;
+     background: #eee;
+     width: 100%;
+     height: 50%;
+     overflow: scroll;
+}
+
+#userlist {
+     height: 50%;
+     overflow: scroll;
+}
+
+#errors {
+     color: red;
+     font-size: 0.8em;
+}
+
+#chatwindow li {
+     padding-bottom: 1em;
+}
+
+.user_name {
+
+}
+
+.message {
+     margin: 1em 0 1em 0;
+}
+
+#chatnick {
+     border:  none;
+     border-bottom: 1px solid #000;
+     background: #eee;
+     width: 16%;
+}
+
+#chatmsg {
+     /*
+     border:  none;
+     border-bottom: 1px solid #000;
+     */
+     background: #eee;
+     width: 68%;
+}
+
+.red {
+     /*border: 2px solid red;*/
+}
+
+.green {
+     /*border: 2px solid green;*/
+}
+
+footer {
+     grid-area: footer;
+     grid-row: 3;
+
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     justify-content: flex-end;
+}
