@@ -28,7 +28,18 @@ body {
 
 .login_form__login_wrapper input[type=text] {
      max-width: 300px;
-     margin: 0 0 1em 1em;
+     margin: 0 0 0.5em 1em;
+}
+
+.login_form__login_wrapper input[type=submit] {
+     margin-top: 1em;
+}
+
+p.error {
+     margin: 0;
+     padding: 0;
+     color: red;
+     font-size: 0.8em;
 }
 /* login page - end */
 
@@ -88,7 +99,7 @@ main {
      height: 100%;
 }
 
-input, #chatwindow {
+#chat input, #chatwindow {
      font-family: courier new;
      font-size:  12px;
 }
