@@ -109,6 +109,66 @@ class Chat extends chatBase
         }
     }
 
+    public function invalidateUsers() {
+        /**
+         * Users that are not longer shown as online after POLL_INTERVAL * OFFLINE_CYCLES
+         * seconds are removed from the database and their sessions are destroyed.
+         */
+        $pdo = $this->getPdo();
+
+        try {
+            $stmt = $pdo->prepare('SELECT sessionId FROM users WHERE TIME_TO_SEC(TIMEDIFF(NOW(), updated)) > :timedelta');
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return FALSE;
+        }
+        $stmt->execute([
+            ':timedelta' => POLL_INTERVAL * OFFLINE_CYCLES,
+        ]);
+        $result = $stmt->fetchAll(PDO::FETCH_NUM);
+
+        if (!$result) {  // No sessions to invalidate, nothing to do
+            $stmt = null;
+            return FALSE;
+        }
+
+        // Remember sessionId
+        $thisSessionId = session_id();
+        $_SESSION = array();
+        session_destroy();
+        // Destroy sessions
+        foreach ($result as $sessionId) {
+            session_id($sessionId[0]);
+            session_start();
+            //remove PHPSESSID from browser
+            if (isset($_COOKIE[session_name()])) {
+                setcookie($sessionId[0], '', time() - 3600, '/');
+            }
+            $_SESSION = array();
+            session_destroy();
+        }
+        // Resume active session
+        session_id($thisSessionId);
+        session_start();
+
+        try {
+            $stmt = $pdo->prepare('DELETE FROM users WHERE TIME_TO_SEC(TIMEDIFF(NOW(), updated)) > :timedelta');
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return FALSE;
+        }
+        $stmt->execute([
+            ':timedelta' => POLL_INTERVAL * OFFLINE_CYCLES,
+        ]);
+
+        if (!$result) {
+            return FALSE;  // TODO: Add JSON error message, oder einfach ein assoc array mit error feld?
+        } else {
+            $stmt = null;
+            return $result;  // TODO: Evtl. kümmert sich auch eine andere Funktion um das JSON encoding.
+        }
+    }
+
     public function loadMessages($lastId) {
         if ($lastId === FALSE) {
             return FALSE;

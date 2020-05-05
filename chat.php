@@ -102,11 +102,11 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                         $data['errors'] = ["keepAlive returned an error (affectedRows: $affectedRows)"];
                     }
                     $chat = new Chat();
+                    $chat->invalidateUsers();
                     $data = array('data' => $chat->getUsers());
                     break;
                 case 'loadMessages':
                     $data = loadMessages($data['lastId']);
-                    //$_SESSION['lastUpdate'] = date('d.m.Y, H:i:s');
                     break;
                 default:
                     $data = [];
