@@ -2,7 +2,20 @@
 
 include_once 'db.php';
 
-class Message
+class chatBase
+{
+    public function getPdo() {
+        $pdo = new Database();
+
+        if ($pdo === FALSE) {
+            return FALSE;  // TODO: Add JSON error message.
+        } else {
+            return $pdo->getPdo();
+        }
+    }
+}
+
+class Message extends chatBase
 {
     private $user;
     private $message;
@@ -29,13 +42,7 @@ class Message
     }
 
     public function getId() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'SELECT id FROM messages WHERE user = :user AND message = :message'
@@ -55,13 +62,7 @@ class Message
     }
 
     public function saveMessageToDb($posted) {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'INSERT INTO messages (user, posted, message) VALUES (:user, STR_TO_DATE(:posted, "%d.%m.%Y, %T"), :message)'
@@ -78,10 +79,8 @@ class Message
     }
 }
 
-class Chat
+class Chat extends chatBase
 {
-    private $users;
-
     public function getUsers() {
         /**
          * Returns users who are online. Online/offline is determined by the
@@ -89,14 +88,8 @@ class Chat
          * it's older than POLL_INTERVALL * OFFLINE_CYCLES seconds the user is
          * no longer returned.
          */
-        $pdo = new Database();
+        $pdo = $this->getPdo();
 
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message, oder einfach ein assoc array mit error feld?
-        } else {
-            $pdo = $pdo->getPdo();
-        }
-        //
         try {
             $stmt = $pdo->prepare('SELECT username FROM users WHERE TIME_TO_SEC(TIMEDIFF(NOW(), updated)) < :timedelta');
         } catch (PDOException $e) {
@@ -121,13 +114,7 @@ class Chat
             return FALSE;
         }
 
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message, oder einfach ein assoc array mit error feld?
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         // Get the last n rows
         try {
@@ -158,13 +145,7 @@ class Chat
     }
 
     public function getHistory() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message, oder einfach ein assoc array mit error feld?
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         // Get the last n rows
         try {
@@ -203,7 +184,7 @@ class Chat
     }
 }
 
-class User
+class User extends chatBase
 {
     private $username;
     private $sessionId;
@@ -235,13 +216,7 @@ class User
     }
 
     public function usernameExists() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'SELECT id FROM users WHERE username = :username'
@@ -259,13 +234,7 @@ class User
     }
 
     public function getUsernameFromSessionId() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'SELECT username FROM users WHERE sessionId = :sessionId'
@@ -283,13 +252,7 @@ class User
     }
 
     public function getId() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'SELECT id FROM users WHERE sessionId = :sessionId'
@@ -307,13 +270,7 @@ class User
     }
 
     public function saveUserToDb() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'INSERT INTO users (username, created, updated, sessionId) VALUES (:username, NOW(), NOW(), :sessionId)'
@@ -329,13 +286,7 @@ class User
     }
 
     public function keepAlive() {
-        $pdo = new Database();
-
-        if ($pdo === FALSE) {
-            return FALSE;  // TODO: Add JSON error message.
-        } else {
-            $pdo = $pdo->getPdo();
-        }
+        $pdo = $this->getPdo();
 
         $stmt = $pdo->prepare(
             'UPDATE users SET updated = NOW() WHERE sessionId = :sessionId'
