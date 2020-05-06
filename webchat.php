@@ -1,3 +1,4 @@
+<?php include_once 'config.php'; ?>
 <!doctype html>
 <html lang="de">
     <head>
@@ -20,19 +21,19 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
         <link rel="stylesheet" href="assets/css/style.css" type="text/css">
         <script src="node_modules/vue/dist/vue.min.js"></script>
-        <!-- <script src="node_modules/axios/dist/axios.js"></script> -->
     </head>
     <body>
         <div class="grid-container">
             <header>
-                <img src="assets/grafix/pentateuch.png" height="65px">&nbsp;<h1>St. Franziskus - Gottesdienst im Livestream</h1>
+                <h1><img src="assets/grafix/pentateuch.png" height="65px">&nbsp;St. Franziskus - Gottesdienst im Livestream</h1>
             </header>
             <main>
                 <div class="video">
                     <div class="video_container">
-                        <!-- <iframe src="https://player.twitch.tv/?channel=mr_muli" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/mr_muli?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from mr_muli on www.twitch.tv</a> -->
+                        <?php echo EMBED_CODE; ?>
                     </div>
                 </div>
                 <div id="chat">
@@ -41,27 +42,31 @@
                             <li v-for="error in errors">{{ error }}</li>
                         </ul>
                     </div>
-                    <div id="chatwindow">
+                    <div class="headingWrapper" v-bind:class="{chatHeadingFix: chatActive}">
+                        <h2 id="chatHeading" v-on:click="showChat" v-bind:class="{inactive: userlistActive}">Nachrichten</h2>
+                        <h2 id="userlistHeading" v-on:click="showUsers" v-bind:class="{inactive: chatActive}">Teilnehmer</h2>
+                    </div>
+                    <div id="chatwindow" v-show="chatActive">
                         <ul>
                             <li v-for="message in chatMessages">
-                                <strong>{{ message.username }}:</strong> {{ message.posted }}<br>
-                                {{ message.message }}
+                                <strong>{{ message.username }}:</strong> {{ message.posted }}
+                                <p>{{ message.message }}</p>
                             </li>
                         </ul>
                     </div>
-                    <br>
-                    <input id="chatnick" v-model="username" type="text" size="9" placeholder="username">&nbsp;
-                    <input id="chatmsg" v-model="message" v-on:keyup.enter="postMessage" :class="[message.length < 3 ? 'red' : 'green']" type="text" placeholder="message ...">
-                    <input type="button" v-on:click="postMessage" v-bind:disabled="message.length < 3" value="absenden">
-                    <!-- <input type="button" @:click="postMessage" @:keyup.enter="postMessage" :disabled="message.length < 3" value="+ add" onclick="submit_msg();"> -->
+                    <form v-show="chatActive">
+                        <div class="innerFormWrapper">
+                            <p id="chatnick" v-model="username" ><strong>{{ username }}:</strong></p>
+                            <textarea id="chatmsg" v-model="message" rows="4" placeholder="Nachricht ..."></textarea>
+                            <input type="button" v-on:click="postMessage" value="absenden">
+                            <!-- <input type="button" @:click="postMessage" @:keyup.enter="postMessage" :disabled="message.length < 3" value="+ add" onclick="submit_msg();"> -->
 
-                    <!--  <chat :status="status" /> Chat as a vue component -->
-                    <div id="userlist" v-show="users.length > 0">
-                        <h3>Teilnehmer</h3>
-                        <ul>
-                            <li v-for="user in users">{{ user[0] }}</li>
-                        </ul>
-                    </div>
+                            <!--  <chat :status="status" /> Chat as a vue component -->
+                        </div>
+                    </form>
+                    <ul id="userlist" v-show="userlistActive">
+                        <li v-for="user in users">{{ user[0] }}</li>
+                    </ul>
                 </div>
             </main>
             <footer>
