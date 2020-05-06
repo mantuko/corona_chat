@@ -25,11 +25,9 @@ var app = new Vue({
     ],
     */
     data: {
+        ajaxUrl: 'http://chat.local/chat.php',
+        chatActive: true,
         chatMessages: [],
-        message: '',
-        username: '',
-        users: [],
-        errors: [],
         dateOptions: {
             year: 'numeric', month: '2-digit', day: '2-digit',
             hour: '2-digit', minute: '2-digit', second: '2-digit',
@@ -37,7 +35,11 @@ var app = new Vue({
             //timeZone: 'UTC'
             timeZone: 'Europe/Berlin',
         },
-        ajaxUrl: 'http://chat.local/chat.php'
+        errors: [],
+        message: '',
+        userlistActive: false,
+        username: '',
+        users: []
     },
     created: function() {
         this.loadInitialMessages();
@@ -161,6 +163,16 @@ var app = new Vue({
             })
             .catch(error => console.error(error));
             this.message = "";
+        },
+        showChat: function() {
+            this.chatActive = true;
+            this.userlistActive = false;
+            console.log("showChat");
+        },
+        showUsers: function() {
+            this.userlistActive = true;
+            this.chatActive = false;
+            console.log("showUsers");
         }
     }
 });

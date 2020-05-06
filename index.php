@@ -34,7 +34,7 @@
             if (sizeof($form_error) == 0) {  // If no error redirect
 
                 $_SESSION['username'] = $user->getUsername();
-                header('Location: http://chat.local/chat.html', TRUE);
+                header('Location: http://chat.local/webchat.php', TRUE);
                 die();
             }
         } else {
@@ -67,13 +67,14 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
         <link rel="stylesheet" href="assets/css/style.css" type="text/css">
         <script src="node_modules/vue/dist/vue.js"></script>
     </head>
     <body>
         <div class="login_wrapper__body">
             <div class="login_form__login_wrapper">
-                <h1>Anmeldung</h1>
+                <h2>Anmeldung</h2>
                 <p>
                     Der Name dient dazu Dich im Chat zu identifizieren. Es kann sowohl
                     der Klarname, als auch ein Pseudonym gewählt werden.

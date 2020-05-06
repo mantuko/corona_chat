@@ -6,14 +6,16 @@ html {
 body {
      background: #fff;
      font-family: arial;
+     font-size: 16px;
+     line-height: 1.3em;
      color:  #333;
      height: 100%;
-     margin: 0;
+     background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
 
 /* login page - start */
 .login_wrapper__body {
-     height: 100%;
+     height: 80%;
 
      display: flex;
      justify-content: center;
@@ -21,9 +23,12 @@ body {
 }
 
 .login_form__login_wrapper {
-     max-width: 400px;
-     padding: 1em;
-     background-color: #eee;
+     background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
+     background-blend-mode: screen;
+     max-width: 500px;
+     padding: 2em;
+     border-radius: 0.5em;
+     border: 3px solid #444;
 }
 
 .login_form__login_wrapper input[type=text] {
@@ -32,7 +37,7 @@ body {
 }
 
 .login_form__login_wrapper input[type=submit] {
-     margin-top: 1em;
+     margin: 0 0 0.5em 1em;
 }
 
 p.error {
@@ -63,7 +68,36 @@ header {
 }
 
 h1 {
+     font-size: 2em;
+     font-weight: bolder;
+     color: #ccc;
+     margin-top: 0.5em;
+     text-shadow: -1px 0px 2px #500099;
 
+}
+
+h2 {
+     font-size: 1.5em;
+     font-weight: bolder;
+     padding-bottom: 0.5em;
+}
+
+h3 {
+     font-size: 1.2em;
+     font-weight: bolder;
+}
+
+h4 {
+     font-size: 1em;
+     font-weight: bolder;
+}
+
+p {
+     margin: 0 0 0.75em 0;
+}
+
+strong {
+     font-weight: bold;
 }
 
 main {
@@ -99,32 +133,127 @@ main {
      height: 100%;
 }
 
-#chat input, #chatwindow {
-     font-family: courier new;
-     font-size:  12px;
+#chat {
+     background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
+     background-blend-mode: screen;
+     border-radius: 0.5em;
+     border: 3px solid #444;
+     width: 30%;
+     padding: 1em;
+     text-align: left;
+
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     justify-content: space-between;
+     align-items: stretch;
 }
 
 input[type=button] {
     cursor:  pointer;
-    border:  1px solid gray;
 }
 
-#chat {
-     width: 30%;
-     text-align: left;
+
+.headingWrapper {
+     display: flex;
+     justify-content: flex-end;
+}
+
+#chat h2 {
+     width: 50%;
+     font-size: 1.2em;
+     padding: 0.25em 0 0.25em 0.25em;
+     background-color: rgba(0,0,0,0.10);
+     border-top: 1px solid #000;
+     border-right: 1px solid #000;
+     box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+}
+
+#chatHeading {
+     border-left: 1px solid #000;
+     border-top-left-radius: 0.5em;
+     box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+}
+
+.chatHeadingFix {
+     height: 2.5em;
+}
+
+#userlistHeading {
+     border-top: 1px solid #000;
+     border-right: 1px solid #000;
+     border-top-right-radius: 0.5em;
+     box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+}
+
+h2.inactive {
+     cursor: pointer;
+     color: #ddd;
+     border-bottom: 1px solid #000;
+     background-color: rgba(0,0,0,0.20) !important;
+     box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
 }
 
 #chatwindow {
-     border: 1px solid #000;
-     background: #eee;
      width: 100%;
-     height: 50%;
-     overflow: scroll;
+     height: 100%;
+     box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     overflow: auto;
+     border-right: 1px solid #000;
+     border-bottom: 1px solid #000;
+     border-left: 1px solid #000;
+     background-color: rgba(0,0,0,0.10);
+     overflow-y: scroll;
+}
+
+#chat form {
+     margin: 0;
+     padding: 0;
+     width: 100%;
+     box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     border-top: 1px solid #bbb;
+     border-right: 1px solid #000;
+     border-bottom: 1px solid #000;
+     border-left: 1px solid #000;
+     border-bottom-left-radius: 0.5em;
+     border-bottom-right-radius: 0.5em;
+     background-color: rgba(0,0,0,0.10);
+}
+
+.innerFormWrapper {
+     padding: 0.25em;
+}
+
+.innerFormWrapper p {
+     text-shadow: -1px 0px 2px #eee;
 }
 
 #userlist {
-     height: 50%;
-     overflow: scroll;
+     border-right: 1px solid #000;
+     border-bottom: 1px solid #000;
+     border-left: 1px solid #000;
+     height: 100%;
+     padding-top: 0.25em;
+     border-bottom-left-radius: 0.5em;
+     border-bottom-right-radius: 0.5em;
+     background-color: rgba(0,0,0,0.10);
+}
+
+#userlist li {
+     list-style: disc;
+     margin-left: 2em;
 }
 
 #errors {
@@ -133,7 +262,16 @@ input[type=button] {
 }
 
 #chatwindow li {
-     padding-bottom: 1em;
+     padding: 0.25em;
+     background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+     margin: 0.25em;
+     border-radius: 0.25em;
+     text-shadow: -1px 0px 2px #eee;
+}
+
+#chatwindow li p {
+     margin: 0;
+     padding-left: 1em;
 }
 
 .user_name {
@@ -145,19 +283,12 @@ input[type=button] {
 }
 
 #chatnick {
-     border:  none;
-     border-bottom: 1px solid #000;
-     background: #eee;
-     width: 16%;
+     margin-bottom: 0.25em;
 }
 
 #chatmsg {
-     /*
-     border:  none;
-     border-bottom: 1px solid #000;
-     */
-     background: #eee;
-     width: 68%;
+     width: 98%;
+     margin-bottom: 0.5em;
 }
 
 .red {
