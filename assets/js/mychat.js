@@ -17,6 +17,9 @@ Vue.component('chat', {
 })
 */
 
+var baseUrl = 'http://chat.local';
+
+
 var app = new Vue({
     el: '#chat',
     /*
@@ -25,7 +28,7 @@ var app = new Vue({
     ],
     */
     data: {
-        ajaxUrl: 'http://chat.local/chat.php',
+        ajaxUrl: baseUrl + '/chat.php',
         chatActive: true,
         chatMessages: [],
         dateOptions: {
@@ -81,6 +84,10 @@ var app = new Vue({
                 .catch(error => console.error(error));
         },
         loadMessages: function() {
+            /* Redirect to login page if session is expired */
+            if (this.username == '') {
+                window.location.replace(baseUrl);
+            }
             let date = new Date();
             let dateString = new Intl.DateTimeFormat('de-DE', this.dateOptions).format(date);
 
