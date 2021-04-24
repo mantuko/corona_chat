@@ -11,3 +11,7 @@ define( 'DB_PASSWORD', '' );
 
 /** MySQL hostname */
 define( 'DB_HOST', '' );
+
+/** Video embed code **/
+define('TWITCH_CHANNEL', '');
+

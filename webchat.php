@@ -33,7 +33,8 @@
             <main>
                 <div class="video">
                     <div class="video_container">
-                        <?php echo EMBED_CODE; ?>
+                        <!-- Add a placeholder for the Twitch embed -->
+                        <div id="twitch-embed"></div>
                     </div>
                 </div>
                 <div id="chat">
@@ -73,6 +74,18 @@
                 <p></p>
             </footer>
         </div>
+        <!-- Load the Twitch embed script -->
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+        <!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
+        <script type="text/javascript">
+          new Twitch.Embed("twitch-embed", {
+            width: '100%',
+            height: '100%',
+            channel: '<?php echo TWITCH_CHANNEL ?>',
+            layout: 'video',
+          });
+        </script>
     </body>
 </html>
 <script src="assets/js/mychat.js"></script>
