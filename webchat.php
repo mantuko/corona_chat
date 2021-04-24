@@ -89,4 +89,3 @@
     </body>
 </html>
 <script src="assets/js/mychat.js"></script>
-<!--<script src="assets/js/chat.js"></script>-->
