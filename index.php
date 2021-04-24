@@ -34,7 +34,7 @@
             if (sizeof($form_error) == 0) {  // If no error redirect
 
                 $_SESSION['username'] = $user->getUsername();
-                header('Location: http://chat.local/webchat.php', TRUE);
+                header('Location: '. WEBCHAT_URL, TRUE);
                 die();
             }
         } else {

@@ -19,6 +19,9 @@ define( 'DB_HOST', '' );
 /** Video embed code **/
 define('TWITCH_CHANNEL', '');
 
+/** Webchat url **/
+define('WEBCHAT_URL', 'http://chat.local/webchat.php');
+
 /** Polling intervall in seconds */
 define('POLL_INTERVAL', 3);
 
