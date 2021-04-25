@@ -182,12 +182,10 @@ var app = new Vue({
         showChat: function() {
             this.chatActive = true;
             this.userlistActive = false;
-            console.log("showChat");
         },
         showUsers: function() {
             this.userlistActive = true;
             this.chatActive = false;
-            console.log("showUsers");
         }
     }
 });
