@@ -54,6 +54,14 @@ var app = new Vue({
             this.loadMessages();
         }.bind(this), 3000);
     },
+    filters: {
+        decode: function(value) {
+            if (value) {
+                return he.decode(value);
+            }
+            return null;
+        }
+    },
     methods: {
         getUsers: function() {
             fetch(this.ajaxUrl, {

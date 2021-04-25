@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
         <link rel="stylesheet" href="assets/css/style.css" type="text/css">
         <script src="node_modules/vue/dist/vue.min.js"></script>
+        <script src="node_modules/he/he.js"></script>
     </head>
     <body>
         <div class="grid-container">
@@ -51,7 +52,7 @@
                         <ul>
                             <li v-for="message in chatMessages">
                                 <strong>{{ message.username }}:</strong> {{ message.posted }}
-                                <p>{{ message.message }}</p>
+                                <p>{{ message.message | decode }}</p>
                             </li>
                         </ul>
                     </div>

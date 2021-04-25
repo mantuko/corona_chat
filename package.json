@@ -5,6 +5,7 @@
   "author": "Stephan Klein",
   "private": true,
   "dependencies": {
+    "he": "^1.2.0",
     "vue": "^2.6.12"
   }
 }
