@@ -73,7 +73,6 @@ h1 {
      color: #ccc;
      margin-top: 0.5em;
      text-shadow: -1px 0px 2px #500099;
-
 }
 
 h2 {
@@ -326,6 +325,10 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+     h1 {
+          text-align: center;
+     }
+
      main {
           flex-direction: column;
           justify-content: space-around;
