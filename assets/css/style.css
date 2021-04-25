@@ -245,6 +245,7 @@ h2.inactive {
      display: flex;
      justify-content: space-between;
 }
+
 #userlist {
      border-right: 1px solid #000;
      border-bottom: 1px solid #000;
@@ -312,4 +313,20 @@ footer {
      flex-direction: row;
      flex-wrap: nowrap;
      justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+     main {
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+     }
+
+     .video {
+          width: 95%;
+     }
+
+     #chat {
+          width: 90%;
+     }
 }
