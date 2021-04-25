@@ -46,7 +46,7 @@
                     </div>
                     <div class="headingWrapper" v-bind:class="{chatHeadingFix: chatActive}">
                         <h2 id="chatHeading" v-on:click="showChat" v-bind:class="{inactive: userlistActive}">Nachrichten</h2>
-                        <h2 id="userlistHeading" v-on:click="showUsers" v-bind:class="{inactive: chatActive}">Teilnehmer</h2>
+                        <h2 id="userlistHeading" v-on:click="showUsers" v-bind:class="{inactive: chatActive}">Teilnehmer*innen</h2>
                     </div>
                     <div id="chatwindow" v-show="chatActive">
                         <ul>
@@ -59,7 +59,8 @@
                     <form v-show="chatActive">
                         <div class="innerFormWrapper">
                             <p id="chatnick" v-model="username" ><strong>{{ username }}:</strong></p>
-                            <textarea id="chatmsg" v-model="message" rows="4" placeholder="Nachricht ..."></textarea>
+                            <textarea id="chatmsg" v-model="message" v-on:keyup.enter="postMessage" rows="4" placeholder="Nachricht ..."></textarea>
+                            <span>Absenden: Shift + Enter</span>
                             <input type="button" v-on:click="postMessage" value="absenden">
                             <!-- <input type="button" @:click="postMessage" @:keyup.enter="postMessage" :disabled="message.length < 3" value="+ add" onclick="submit_msg();"> -->
 
