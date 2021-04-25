@@ -43,12 +43,24 @@ function postMessage($data) {
         'posted'   => FILTER_SANITIZE_STRING,
         'message'  => FILTER_SANITIZE_STRING,
     ] );
-    $user = new User(session_id());  // TODO: Username noch mit reinstecken und dann im Konstruktor testen
-    $msg = new Message($user, $data['message']);
-    $affectedRows = $msg->saveMessageToDb($data['posted']);
 
-    if ($affectedRows != 1) {
-        return ['errors' => ["Error while saving message to db (affectedRows: $affectedRows)"]];
+    if ($data['username'] != '' && $data['posted'] != '' && $data['message'] != '') {
+        $user = new User(session_id());
+        if ($user->getUsername() == '') {
+            return ['errors' => ["Error while saving message. Session expired. User deleted from db."]];
+        }
+
+        $msg = new Message($user, $data['message']);
+        $encoded_msg = new Message($user, htmlentities($data['message']));
+        $affectedRows = $msg->saveMessageToDb($data['posted']);
+
+        if ($affectedRows != 1) {
+            return ['errors' => ["Error while saving message to db (affectedRows: $affectedRows)"]];
+        }
+    } else if ($data['posted'] == '') {
+        return ['errors' => ["Error while saving message. Post date not set."]];
+    } else if ($data['message'] == '') {
+        return ['errors' => ["Error while saving message. Message not set."]];
     }
 
     return array();
