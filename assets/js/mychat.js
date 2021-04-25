@@ -96,9 +96,10 @@ var app = new Vue({
             if (this.username == '') {
                 window.location.replace(baseUrl);
             }
+            /*
             let date = new Date();
             let dateString = new Intl.DateTimeFormat('de-DE', this.dateOptions).format(date);
-
+            */
             let lastId = 0;
             for (let i = this.chatMessages.length - 1; i > 0; i--) {
                 if (typeof this.chatMessages[i].id !== 'undefined' && this.chatMessages[i].id > 0) {
