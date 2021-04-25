@@ -60,8 +60,10 @@
                         <div class="innerFormWrapper">
                             <p id="chatnick" v-model="username" ><strong>{{ username }}:</strong></p>
                             <textarea id="chatmsg" v-model="message" v-on:keyup.enter="postMessage" rows="4" placeholder="Nachricht ..."></textarea>
-                            <span>Absenden: Shift + Enter</span>
-                            <input type="button" v-on:click="postMessage" value="absenden">
+                            <div class="chatSubmitWrapper">
+                                <span>Absenden: Shift + Enter</span>
+                                <input type="button" v-on:click="postMessage" value="absenden">
+                            </div>
                             <!-- <input type="button" @:click="postMessage" @:keyup.enter="postMessage" :disabled="message.length < 3" value="+ add" onclick="submit_msg();"> -->
 
                             <!--  <chat :status="status" /> Chat as a vue component -->

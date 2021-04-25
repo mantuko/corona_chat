@@ -134,7 +134,11 @@ var app = new Vue({
             })
             .catch(error => console.error(error));
         },
-        postMessage: function() {
+        postMessage: function(event) {
+            if ((!event.shiftKey && event.type != 'click') || this.username == '') {
+                return;
+            }
+
             let date = new Date();
             options = {
                 year: 'numeric', month: '2-digit', day: '2-digit',
@@ -172,7 +176,7 @@ var app = new Vue({
                 })
             }).then(response => response.json())
             .then(json => {
-                if (json.errors) {
+                if (json != null && json.hasOwnProperty('errors')) {
                     this.errors = json.errors;
                 }
             })

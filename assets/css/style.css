@@ -236,10 +236,15 @@ h2.inactive {
      padding: 0.25em;
 }
 
-.innerFormWrapper p {
+.innerFormWrapper p,
+.innerFormWrapper span {
      text-shadow: -1px 0px 2px #eee;
 }
 
+.chatSubmitWrapper {
+     display: flex;
+     justify-content: space-between;
+}
 #userlist {
      border-right: 1px solid #000;
      border-bottom: 1px solid #000;
