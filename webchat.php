@@ -51,8 +51,14 @@
                     <div id="chatwindow" v-show="chatActive">
                         <ul>
                             <li v-for="message in chatMessages">
-                                <strong>{{ message.username }}:</strong> {{ message.posted }}
-                                <p>{{ message.message | decode }}</p>
+                                <div class="ownMessage" v-if="username == message.username">
+                                    <strong>{{ message.username }}:</strong> {{ message.posted }}
+                                    <p>{{ message.message | decode }}</p>
+                                </div>
+                                <div v-else>
+                                    <strong>{{ message.username }}:</strong> {{ message.posted }}
+                                    <p>{{ message.message | decode }}</p>
+                                </div>
                             </li>
                         </ul>
                     </div>

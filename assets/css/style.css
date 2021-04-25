@@ -268,11 +268,21 @@ h2.inactive {
 }
 
 #chatwindow li {
-     padding: 0.25em;
-     background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+     padding: 0;
      margin: 0.25em;
      border-radius: 0.25em;
      text-shadow: -1px 0px 2px #eee;
+}
+
+#chatwindow li div {
+     background-color: #e6b980;
+     border-radius: 0.25em;
+     text-shadow: -1px 0px 2px #eee;
+     padding: 0.25em;
+}
+
+#chatwindow li div.ownMessage {
+     background-color: #adfdb7;
 }
 
 #chatwindow li p {
